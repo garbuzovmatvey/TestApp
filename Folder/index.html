@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Content-Based Movie Recommender</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Content-Based Movie Recommender</h1>
+    <p class="instructions">Select a movie you like, and we'll find similar ones for you!</p>
+
+    <div class="controls">
+      <label for="movie-select" class="label">Choose a movie</label>
+      <select id="movie-select" aria-label="Movie select">
+        <!-- Options populated dynamically -->
+      </select>
+
+      <button id="recommend-btn" onclick="getRecommendations()">Get Recommendations</button>
+    </div>
+
+    <div id="result-box" class="result-box" role="status" aria-live="polite">
+      <p id="result" class="result">Loading data...</p>
+    </div>
+
+    <footer class="footer">
+      <small>Data source: local files (u.item, u.data). Make sure they are in the same folder as this page.</small>
+    </footer>
+  </main>
+
+  <!-- NOTE: data.js MUST be loaded before script.js -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
