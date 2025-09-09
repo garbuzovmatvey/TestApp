@@ -128,20 +128,19 @@ function getRecommendations() {
 
     const top = scoredMovies.slice(0, 5).filter(m => m.score > 0); // я сделал top-5 для наглядности
 
-    if (top.length === 0) {
-      result.innerText = `Because you liked "${likedMovie.title}", we couldn't find very similar movies.`;
-    } else {
-      let html = `<p>Because you liked "<strong>${likedMovie.title}</strong>", we recommend:</p><ul>`;
-      for (const m of top) {
-        html += `<li>${m.title} <span style="color:#555;">(score: ${m.score.toFixed(2)})</span></li>`;
-      }
-      html += "</ul>";
-      result.innerHTML = html;
-    }
-  } catch (err) {
-    console.error("getRecommendations error:", err);
-    result.innerText = `Error computing recommendations: ${err.message}`;
+if (top.length === 0) {
+  result.innerHTML = `Because you liked "<strong>${likedMovie.title}</strong>", we couldn't find very similar movies.`;
+} else {
+  let html = `<p>Because you liked "<strong>${likedMovie.title}</strong>", we recommend:</p><ul>`;
+  for (const m of top) {
+    html += `<li>${m.title} <span>(score: ${m.score.toFixed(2)})</span></li>`;
   }
+  html += "</ul>";
+  result.innerHTML = html;
+}
+
+
+   
 }
 
 /* Initialization: load data, populate dropdown, set initial message */
