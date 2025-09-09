@@ -133,3 +133,28 @@ body {
     width: 100%;
   }
 }
+
+/* Стили для списка рекомендаций */
+.result-box ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.result-box li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.result-box li span {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Можно добавить небольшой hover-эффект для интерактивности */
+.result-box li:hover {
+  background-color: #f0f4f8;
+  border-radius: 4px;
+  padding-left: 4px;
+}
