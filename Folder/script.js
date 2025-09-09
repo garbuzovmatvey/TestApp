@@ -87,11 +87,11 @@ function computeJaccard(setA, setB) {
  * 7. Display result text in #result
  */
 function getRecommendations() {
-  const result = resultEl();
+  const result = document.getElementById("result");
   if (!result) return;
 
   try {
-    const sel = selectEl();
+    const sel = document.getElementById("movie-select");
     if (!sel) {
       result.innerText = "Internal error: movie select not found.";
       return;
@@ -109,49 +109,38 @@ function getRecommendations() {
       return;
     }
 
-    // Step 2: find liked movie
     const likedMovie = movies.find(m => m.id === selectedId);
     if (!likedMovie) {
       result.innerText = "Selected movie not found in dataset.";
       return;
     }
 
-    // Step 3: prepare for similarity
     const likedGenresSet = new Set(likedMovie.genres || []);
     const candidateMovies = movies.filter(m => m.id !== likedMovie.id);
 
-    // Step 4: calculate scores
     const scoredMovies = candidateMovies.map(candidate => {
       const candSet = new Set(candidate.genres || []);
       const score = computeJaccard(likedGenresSet, candSet);
       return { ...candidate, score };
     });
 
-    // Step 5: sort by score descending (tie-breaker by title)
-    scoredMovies.sort((a, b) => {
-      if (b.score !== a.score) return b.score - a.score;
-      // stable tie-breaker: alphabetical title
-      const ta = (a.title || "").toLowerCase();
-      const tb = (b.title || "").toLowerCase();
-      if (ta < tb) return -1;
-      if (ta > tb) return 1;
-      return 0;
-    });
+    scoredMovies.sort((a, b) => b.score - a.score);
 
-    // Step 6: take top two
-    const top = scoredMovies.slice(0, 2).filter(m => m.score > 0);
+    const top = scoredMovies.slice(0, 5).filter(m => m.score > 0); // я сделал top-5 для наглядности
 
-    // Step 7: display result
     if (top.length === 0) {
-      result.innerText = `Because you liked "${likedMovie.title}", we couldn't find very similar movies based on genre alone. Try another selection.`;
-    } else if (top.length === 1) {
-      result.innerText = `Because you liked "${likedMovie.title}", we recommend: ${top[0].title} (score: ${top[0].score.toFixed(2)})`;
+      result.innerText = `Because you liked "${likedMovie.title}", we couldn't find very similar movies.`;
     } else {
-      result.innerText = `Because you liked "${likedMovie.title}", we recommend: ${top[0].title} (score: ${top[0].score.toFixed(2)}), ${top[1].title} (score: ${top[1].score.toFixed(2)})`;
+      let html = `<p>Because you liked "<strong>${likedMovie.title}</strong>", we recommend:</p><ul>`;
+      for (const m of top) {
+        html += `<li>${m.title} <span style="color:#555;">(score: ${m.score.toFixed(2)})</span></li>`;
+      }
+      html += "</ul>";
+      result.innerHTML = html;
     }
   } catch (err) {
     console.error("getRecommendations error:", err);
-    resultEl().innerText = `Error computing recommendations: ${err.message}`;
+    result.innerText = `Error computing recommendations: ${err.message}`;
   }
 }
 
