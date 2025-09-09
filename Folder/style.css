@@ -1,0 +1,135 @@
+/* Reset-ish */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Page body */
+body {
+  font-family: "Helvetica", "Arial", sans-serif;
+  background: #f4f7f6; /* light neutral */
+  color: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+/* Main container */
+.container {
+  width: 100%;
+  max-width: 760px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(20, 30, 40, 0.08);
+  padding: 28px;
+  text-align: center;
+}
+
+/* Heading */
+.container h1 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+/* Instructions */
+.instructions {
+  color: #4b5563;
+  margin-bottom: 20px;
+  font-size: 0.98rem;
+}
+
+/* Controls area */
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.label {
+  display: none; /* screen readers only through for attribute; kept visually hidden */
+}
+
+/* Select styling */
+#movie-select {
+  min-width: 280px;
+  max-width: 520px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  background: #fff;
+  outline: none;
+  transition: box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+#movie-select:focus {
+  border-color: #8ab4ff;
+  box-shadow: 0 0 0 4px rgba(138, 180, 255, 0.12);
+}
+
+/* Button styling */
+#recommend-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #1767d1; /* inviting blue */
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(23, 103, 209, 0.16);
+  transition: transform 0.08s ease, background 0.12s ease;
+}
+
+#recommend-btn:hover {
+  background: #0f54b3; /* slightly darker */
+  transform: translateY(-1px);
+}
+
+#recommend-btn:active {
+  transform: translateY(0);
+}
+
+/* Result box */
+.result-box {
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #f7fafb;
+  border: 1px solid #e6eef6;
+}
+
+.result {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0f1724;
+}
+
+/* Footer */
+.footer {
+  margin-top: 18px;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 520px) {
+  .controls {
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  #movie-select {
+    width: 100%;
+  }
+
+  #recommend-btn {
+    width: 100%;
+  }
+}
